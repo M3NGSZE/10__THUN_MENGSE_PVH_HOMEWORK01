@@ -42,10 +42,19 @@ var totalCoast = 0.0
 
 fun main(){
 
-    while (true){
-//        when()
+    var index = 0
+//    val indexName = productNames.size
+//    val indexPrice = productNames.size
+//    println(indexName)
+//    println(indexPrice)
+
+    while (index < productNames.size || index < productPrices.size){
+        println(productNames[index])
+        index++
     }
 
-    println(productNames)
-    println(totalCoast)
+    for ((index, item) in productNames.withIndex()) println("${index+1}. $item - $${productPrices.get(index)}")
+
+    productNames.forEachIndexed { index, item -> println("${index+1}. $item - $${productPrices.get(index)}") }
+
 }
