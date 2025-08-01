@@ -1,3 +1,4 @@
+
 val productNames: List<String> = listOf(
     "Laptop",
     "Mouse",
@@ -41,8 +42,6 @@ val productPrices: List<Double> = listOf(
 var totalCost = 0.0
 
 var shoppingCart: MutableList<String> = mutableListOf()
-
-var finalCost = totalCost
 
 fun main(){
 
@@ -92,18 +91,22 @@ fun main(){
         println("\nTotal Price: $totalCost")
     }
 
+    var finalCost = totalCost
+
     if (shoppingCart.contains("Laptop") && shoppingCart.contains("Mouse")){
-
+        finalCost -= productPrices[1] * 0.08
     }else if (shoppingCart.contains("Headphones") && shoppingCart.contains("Microphone")){
-
+        finalCost -= 10
     }
 
     if (finalCost > 1500.00){
-
+        finalCost -= finalCost * 0.1
     }else if (finalCost > 500){
+        finalCost -= finalCost * 0.1
+    }
 
-    }else{
-
+    if (finalCost > 0){
+        print("\nTotal Cost After Discount: $finalCost\n")
     }
 
 
