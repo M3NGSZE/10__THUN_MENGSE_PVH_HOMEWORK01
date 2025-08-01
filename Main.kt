@@ -1,3 +1,5 @@
+import java.util.*
+
 val productNames: List<String> = listOf(
     "Laptop",
     "Mouse",
@@ -40,21 +42,63 @@ val productPrices: List<Double> = listOf(
 
 var totalCoast = 0.0
 
+var shoppingCart: MutableList<String> = mutableListOf()
+
 fun main(){
 
-    var index = 0
-//    val indexName = productNames.size
-//    val indexPrice = productNames.size
-//    println(indexName)
-//    println(indexPrice)
+//    var index = 0
+//    while (index < productNames.size){
+//        println("${index+1}. ${productNames[index]} - $${productPrices[index]}")
+//        index++
+//    }
+//    for ((index, item) in productNames.withIndex()) println("${index+1}. $item - $${productPrices.get(index)}")
 
-    while (index < productNames.size){
-        println("${index+1}. ${productNames[index]} - ${productPrices[index]}")
-        index++
+    productNames.forEachIndexed { index, item -> println("${index+1}. $item - $${productPrices.get(index)}") }
+
+    println()
+
+
+
+//    for (item in productNames){
+//        var found = false
+//        print("Enter product: ")
+//        val product = readln().toString()
+//        if (product.lowercase() == item.lowercase()){
+//            found = true
+//            shoppingCart.add(product)
+//            continue
+//        }else if (product == "done"){
+//            break
+//        }
+//
+//        if (!found){
+//            println("item not found\n")
+//        }
+//    }
+
+
+    while (true){
+        var found = false
+        print("Enter product: ")
+        val product = readln().toString()
+        if (product.lowercase() == "done") break
+        for (item in productNames){
+            if (product.lowercase() == item.lowercase()){
+                found = true
+                shoppingCart.add(product)
+                break
+            }
+            if (!found){
+                println("item not found\n")
+            }
+        }
     }
 
-    for ((index, item) in productNames.withIndex()) println("${index+1}. $item - $${productPrices.get(index)}")
-//
-    productNames.forEachIndexed { index, item -> println("${index+1}. $item - $${productPrices.get(index)}") }
+
+    println(shoppingCart)
+
+
+
+
 
 }
