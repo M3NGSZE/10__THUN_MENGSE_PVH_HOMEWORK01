@@ -53,49 +53,44 @@ fun main(){
 //    }
 //    for ((index, item) in productNames.withIndex()) println("${index+1}. $item - $${productPrices.get(index)}")
 
+    println("Items List and Price\n")
+
     productNames.forEachIndexed { index, item -> println("${index+1}. $item - $${productPrices.get(index)}") }
 
-    println()
-
-
-
-//    for (item in productNames){
-//        var found = false
-//        print("Enter product: ")
-//        val product = readln().toString()
-//        if (product.lowercase() == item.lowercase()){
-//            found = true
-//            shoppingCart.add(product)
-//            continue
-//        }else if (product == "done"){
-//            break
-//        }
-//
-//        if (!found){
-//            println("item not found\n")
-//        }
-//    }
-
+    println("\nAdd Product to Cart\n")
 
     while (true){
         var found = false
         print("Enter product: ")
-        val product = readln().toString()
-        if (product.lowercase() == "done") break
+        val product = readln().toString().trim().lowercase()
+        if (product == "done") break
         for (item in productNames){
-            if (product.lowercase() == item.lowercase()){
+            if (product == item.lowercase()){
                 found = true
-                shoppingCart.add(product)
+                shoppingCart.add(item)
                 break
             }
-            if (!found){
-                println("item not found\n")
-            }
+        }
+        if (!found){
+            println("item not found\n")
         }
     }
 
 
-    println(shoppingCart)
+    println("\nitem in cart: $shoppingCart")
+
+    for ((index, item) in shoppingCart.withIndex()){
+        if (productNames[index] == item){
+            val indexOf = productNames.indexOf(item)
+            totalCoast += productPrices[indexOf]
+        }
+    }
+
+    if (shoppingCart.isEmpty()){
+        println("\nProduct XYZ not found in catalog")
+    }else{
+        println("\nTotal Price: $totalCoast")
+    }
 
 
 
