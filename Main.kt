@@ -48,13 +48,13 @@ fun main(){
 //    println(indexName)
 //    println(indexPrice)
 
-    while (index < productNames.size || index < productPrices.size){
-        println(productNames[index])
+    while (index < productNames.size){
+        println("${index+1}. ${productNames[index]} - ${productPrices[index]}")
         index++
     }
 
     for ((index, item) in productNames.withIndex()) println("${index+1}. $item - $${productPrices.get(index)}")
-
+//
     productNames.forEachIndexed { index, item -> println("${index+1}. $item - $${productPrices.get(index)}") }
 
 }
