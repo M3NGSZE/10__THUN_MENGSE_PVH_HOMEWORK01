@@ -1,5 +1,3 @@
-import java.util.*
-
 val productNames: List<String> = listOf(
     "Laptop",
     "Mouse",
@@ -40,9 +38,11 @@ val productPrices: List<Double> = listOf(
     25.99    // Microphone
 )
 
-var totalCoast = 0.0
+var totalCost = 0.0
 
 var shoppingCart: MutableList<String> = mutableListOf()
+
+var finalCost = totalCost
 
 fun main(){
 
@@ -55,7 +55,7 @@ fun main(){
 
     println("Items List and Price\n")
 
-    productNames.forEachIndexed { index, item -> println("${index+1}. $item - $${productPrices.get(index)}") }
+    productNames.forEachIndexed { index, item -> println("${index+1}. $item - $${productPrices[index]}") }
 
     println("\nAdd Product to Cart\n")
 
@@ -76,28 +76,35 @@ fun main(){
         }
     }
 
-
     println("\nitem in cart: $shoppingCart")
 
-    var indexOf = 0
     for ((index, item) in shoppingCart.withIndex()){
-
-        if (productNames.get(index) != item || productNames.get(index) == item){
-            indexOf = productNames.indexOf(item)
-            totalCoast += productPrices[indexOf]
+        if (productNames[index] != item || productNames[index] == item){
+            val indexOf = productNames.indexOf(item)
+            totalCost += productPrices[indexOf]
         }
 
     }
 
-
     if (shoppingCart.isEmpty()){
         println("\nProduct XYZ not found in catalog")
     }else{
-        println("\nTotal Price: $totalCoast")
+        println("\nTotal Price: $totalCost")
     }
 
+    if (shoppingCart.contains("Laptop") && shoppingCart.contains("Mouse")){
 
+    }else if (shoppingCart.contains("Headphones") && shoppingCart.contains("Microphone")){
 
+    }
+
+    if (finalCost > 1500.00){
+
+    }else if (finalCost > 500){
+
+    }else{
+
+    }
 
 
 }
