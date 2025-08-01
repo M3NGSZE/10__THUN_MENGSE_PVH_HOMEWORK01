@@ -79,12 +79,16 @@ fun main(){
 
     println("\nitem in cart: $shoppingCart")
 
+    var indexOf = 0
     for ((index, item) in shoppingCart.withIndex()){
-        if (productNames[index] == item){
-            val indexOf = productNames.indexOf(item)
+
+        if (productNames.get(index) != item || productNames.get(index) == item){
+            indexOf = productNames.indexOf(item)
             totalCoast += productPrices[indexOf]
         }
+
     }
+
 
     if (shoppingCart.isEmpty()){
         println("\nProduct XYZ not found in catalog")
