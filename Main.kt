@@ -1,68 +1,43 @@
 
 val productNames: List<String> = listOf(
-    "Laptop",
-    "Mouse",
-    "Keyboard",
-    "Monitor",
-    "Webcam",
-    "Wireless Charger",
-    "USB Hub",
-    "Headphones",
-    "External Hard Drive",
-    "Smartphone",
-    "Tablet",
-    "Bluetooth Speaker",
-    "Printer",
-    "Graphics Card",
-    "Desk Lamp",
-    "Office Chair",
-    "Microphone"
+    "Laptop", "Mouse", "Keyboard", "Monitor", "Webcam", "Wireless Charger", "USB Hub", "Headphones",
+    "External Hard Drive", "Smartphone", "Tablet", "Bluetooth Speaker", "Printer", "Graphics Card",
+    "Desk Lamp", "Office Chair", "Microphone"
 )
 
 val productPrices: List<Double> = listOf(
-    999.99,  // Laptop
-    25.50,   // Mouse
-    45.40,   // Keyboard
-    189.99,  // Monitor
-    49.99,   // Webcam
-    29.99,   // Wireless Charger
-    15.00,   // USB Hub
-    89.99,   // Headphones
-    79.50,   // External Hard Drive
-    699.99,  // Smartphone
-    399.99,  // Tablet
-    59.99,   // Bluetooth Speaker
-    149.99,  // Printer
-    349.99,  // Graphics Card
-    24.99,   // Desk Lamp
-    129.99,  // Office Chair
-    25.99    // Microphone
+    999.99, 25.50, 45.40, 189.99, 49.99, 29.99, 15.00, 89.99, 79.50, 699.99, 399.99, 59.99, 149.99,
+    349.99, 24.99, 129.99, 25.99
 )
 
 var totalCost = 0.0
 
 var shoppingCart: MutableList<String> = mutableListOf()
 
+const val firstComboDis = 0.08
+const val secondComboDis = 10.00
+const val highDiscount = 1500.00
+const val highDisTotal = 0.1
+const val lowDiscount = 500.00
+const val lowDisTotal = 0.05
+
 fun main(){
-
-//    var index = 0
-//    while (index < productNames.size){
-//        println("${index+1}. ${productNames[index]} - $${productPrices[index]}")
-//        index++
-//    }
-//    for ((index, item) in productNames.withIndex()) println("${index+1}. $item - $${productPrices.get(index)}")
-
     println("Items List and Price\n")
 
+    // display products follow format (1. Laptop - $1200.00)
     productNames.forEachIndexed { index, item -> println("${index+1}. $item - $${productPrices[index]}") }
 
+    // Add products to cart
     println("\nAdd Product to Cart\n")
 
     while (true){
-        var found = false
+        // prompt user input
         print("Enter product: ")
-        val product = readln().toString().trim().lowercase()
+        val product = readln().trim().lowercase()
         if (product == "done") break
+
+        // add to cart
+        var found = false
         for (item in productNames){
             if (product == item.lowercase()){
                 found = true
@@ -75,41 +50,46 @@ fun main(){
         }
     }
 
-    println("\nitem in cart: $shoppingCart")
-
-    for ((index, item) in shoppingCart.withIndex()){
-        if (productNames[index] != item || productNames[index] == item){
-            val indexOf = productNames.indexOf(item)
-            totalCost += productPrices[indexOf]
+    // display item in cart and calculate total cost
+    println("\nItems in cart")
+    for ((i,item) in shoppingCart.withIndex()) {
+        val index = productNames.indexOf(item)      // find item by item name
+        if (index != -1) {
+            println("${i+1}. $item - $${productPrices[index]}")
+            totalCost += productPrices[index]                       // sum total price by index
         }
-
     }
 
+    // display total cost
     if (shoppingCart.isEmpty()){
         println("\nProduct XYZ not found in catalog")
     }else{
-        println("\nTotal Price: $$totalCost")
+        val roundTotalCost = (totalCost * 100).toInt() / 100.0        // round total cost with 2 decimal
+        println("\nTotal Price: $$roundTotalCost")
     }
 
     var finalCost = totalCost
 
+    // first discount
     if (shoppingCart.contains("Headphones") && shoppingCart.contains("Microphone") && shoppingCart.contains("Laptop") && shoppingCart.contains("Mouse")){
-        finalCost -= (productPrices[1] * 0.08) + 10
+        finalCost -= (productPrices[1] * firstComboDis) + secondComboDis
     }else if (shoppingCart.contains("Laptop") && shoppingCart.contains("Mouse")){
-        finalCost -= productPrices[1] * 0.08
+        finalCost -= productPrices[1] * firstComboDis
     }else if (shoppingCart.contains("Headphones") && shoppingCart.contains("Microphone")) {
-        finalCost -= 10
+        finalCost -= secondComboDis
     }
 
-    if (finalCost > 1500.00){
-        finalCost -= finalCost * 0.1
-    }else if (finalCost > 500){
-        finalCost -= finalCost * 0.05
+    // second discount
+    if (finalCost > highDiscount){
+        finalCost -= finalCost * highDisTotal
+    }else if (finalCost > lowDiscount){
+        finalCost -= finalCost * lowDisTotal
     }
 
+    // display final cost
     if (finalCost > 0){
-        print("\nTotal Cost After Discount: $$finalCost\n")
+        val roundFinalCost = (finalCost * 100).toInt() / 100.0         // round final cost with  2 decimal
+        println("\nFinal Cost: $$roundFinalCost")
     }
 
-    // 2.04, 10
 }
