@@ -88,26 +88,28 @@ fun main(){
     if (shoppingCart.isEmpty()){
         println("\nProduct XYZ not found in catalog")
     }else{
-        println("\nTotal Price: $totalCost")
+        println("\nTotal Price: $$totalCost")
     }
 
     var finalCost = totalCost
 
-    if (shoppingCart.contains("Laptop") && shoppingCart.contains("Mouse")){
+    if (shoppingCart.contains("Headphones") && shoppingCart.contains("Microphone") && shoppingCart.contains("Laptop") && shoppingCart.contains("Mouse")){
+        finalCost -= (productPrices[1] * 0.08) + 10
+    }else if (shoppingCart.contains("Laptop") && shoppingCart.contains("Mouse")){
         finalCost -= productPrices[1] * 0.08
-    }else if (shoppingCart.contains("Headphones") && shoppingCart.contains("Microphone")){
+    }else if (shoppingCart.contains("Headphones") && shoppingCart.contains("Microphone")) {
         finalCost -= 10
     }
 
     if (finalCost > 1500.00){
         finalCost -= finalCost * 0.1
     }else if (finalCost > 500){
-        finalCost -= finalCost * 0.1
+        finalCost -= finalCost * 0.05
     }
 
     if (finalCost > 0){
-        print("\nTotal Cost After Discount: $finalCost\n")
+        print("\nTotal Cost After Discount: $$finalCost\n")
     }
 
-
+    // 2.04, 10
 }
