@@ -1,3 +1,5 @@
+import java.text.DecimalFormat
+
 fun main(){
 
     // print product follow format (1. Laptop - $1200.00)
@@ -17,4 +19,9 @@ fun main(){
             totalCost += productPrices[indexOf]
         }
     }
+
+    // will us it later
+    val number = 123.45678
+    val df = DecimalFormat("#.##")
+    val rounded = df.format(number).toDouble()
 }

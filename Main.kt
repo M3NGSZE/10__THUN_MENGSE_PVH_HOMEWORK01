@@ -29,7 +29,6 @@ fun main(){
 
     // Add products to cart
     println("\nAdd Product to Cart\n")
-
     while (true){
         // prompt user input
         print("Enter product: ")
@@ -53,9 +52,9 @@ fun main(){
     // display item in cart and calculate total cost
     println("\nItems in cart")
     for ((i,item) in shoppingCart.withIndex()) {
-        val index = productNames.indexOf(item)      // find item by item name
+        val index = productNames.indexOf(item)      // find index of item by item name
         if (index != -1) {
-            println("${i+1}. $item - $${productPrices[index]}")
+            println("${i+1}. $item - $${productPrices[index]}")     // display item in cart list
             totalCost += productPrices[index]                       // sum total price by index
         }
     }
